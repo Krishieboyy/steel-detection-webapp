@@ -1,0 +1,86 @@
+# ----------------------------
+# OS / Editor
+# ----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+.idea/
+*.swp
+*.swo
+
+# ----------------------------
+# Python / FastAPI
+# ----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# virtual environments
+.venv/
+venv/
+ENV/
+env/
+*.venv
+
+# env files / secrets
+.env
+.env.*
+*.env
+
+# build / distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# logs
+*.log
+
+# ----------------------------
+# Node / React (Vite)
+# ----------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite / React build outputs
+dist/
+build/
+.vite/
+
+# ----------------------------
+# Model / Data (choose what you want)
+# ----------------------------
+# If you WANT to keep model weights in GitHub, comment these two lines.
+# If you DO NOT want large files in GitHub, uncomment them.
+# saved_model/
+# api/model/model.pth
+# api/model/*.pth
+# *.pth
+
+# datasets / large files (optional)
+data/
+datasets/
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# ----------------------------
+# Misc
+# ----------------------------
+coverage/
+.cache/
