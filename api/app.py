@@ -31,7 +31,7 @@ else:
     import_error = None
 
 # Config
-MODEL_REL_PATH = os.environ.get("MODEL_PATH", os.path.join(ROOT, "saved_model", "steel_defect_model.pth"))
+MODEL_REL_PATH = os.environ.get("MODEL_PATH", os.path.join(ROOT, "api\\saved_model", "steel_defect_model.pth"))
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 CORS_ALLOWED = os.environ.get("CORS_ALLOWED_ORIGINS", "*")
 
