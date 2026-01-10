@@ -1,0 +1,354 @@
+:root {
+  --bg: #07141b;
+  --headerBorder: rgba(0, 210, 255, 0.35);
+  --headerText: #8fe6ff;
+  --muted: rgba(220, 250, 255, 0.7);
+
+  --panel: rgba(80, 180, 200, 0.75);  /* light-cyan rectangle */
+  --inner: rgba(10, 45, 60, 0.88);    /* dark inner box */
+  --dash: rgba(255, 255, 255, 0.55);
+  --dots: rgba(255, 255, 255, 0.35);
+
+  --accent: #20e3ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+               "Courier New", monospace;
+
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("./assets/bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: white;
+}
+
+.page {
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+/* ✅ Heading like reference: wide bar, tight, rectangular */
+.hero-header {
+  width: min(1200px, 95vw);
+  margin: 24px auto 0;
+  padding: 18px 24px;
+  border: 2px solid var(--headerBorder);
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-header h1 {
+  margin: 0;
+  font-size: 44px;
+  letter-spacing: 2px;
+  color: var(--headerText);
+  line-height: 1.1;
+  align-self: center;
+}
+
+.hero-header p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  align-self: center;
+  font-size: large;
+}
+
+.main {
+  width: min(1200px, 95vw);
+  margin: 0 auto;
+}
+
+/* ✅ The 2-layer upload box */
+.upload-stage {
+  margin-top: 70px;
+}
+
+/* outer cyan rectangle */
+.upload-panel {
+  width: min(820px, 92vw);
+  margin: 0 auto;
+  padding: 42px;
+  background: var(--panel);
+}
+
+/* =========================
+   UPLOAD SCREEN (unchanged)
+   ========================= */
+.dropzone-dark {
+  width: 100%;
+  height: 270px;
+  background: var(--inner);
+  border: 2px dashed var(--dash);
+  display: grid;
+  place-items: center;
+}
+
+.dropzone-dark.drag {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(32, 227, 255, 0.18) inset;
+}
+
+.dropzone-dots {
+  width: 88%;
+  height: 75%;
+  border: 2px dotted var(--dots);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  text-align: center;
+}
+
+.cloud-wrap {
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+.drop-title {
+  font-size: 34px;
+  letter-spacing: 2px;
+  margin-top: 6px;
+}
+
+.upload-btn {
+  margin-top: 10px;
+  font-size: 18px;
+  padding: 10px 26px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: white;
+  background: rgba(0, 180, 220, 0.25);
+  border: 1px solid rgba(0, 180, 220, 0.55);
+}
+
+.upload-btn:hover {
+  border-color: rgba(32, 227, 255, 0.85);
+}
+
+/* helper text like reference */
+.helper {
+  margin-top: 55px;
+  text-align: center;
+  color: rgba(255,255,255,0.85);
+  font-size: 18px;
+  line-height: 1.45;
+  letter-spacing: 0.4px;
+  font-size: x-large;
+}
+
+/* optional small result strip */
+.result-strip {
+  width: min(820px, 92vw);
+  margin: 18px auto 0;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  text-align: center;
+  color: rgba(240,255,255,0.9);
+}
+
+.err { color: #ffb6b6; }
+
+/* =========================
+   PREVIEW SCREEN (tuned to match your screenshot)
+   - make dashed box slightly larger
+   - add extra inner dotted frame
+   - button sits low and centered
+   ========================= */
+
+.panel-title {
+  text-align: center;
+  font-size: 44px;              /* slightly bigger like screenshot */
+  color: rgba(255,255,255,0.95);
+  margin-bottom: 18px;
+  letter-spacing: 3px;
+}
+
+/* big dashed rectangle */
+.preview-zone {
+  width: 100%;
+  height: 300px;                /* bigger */
+  background: var(--inner);
+  border: 2px dashed var(--dash);
+  display: grid;
+  place-items: center;
+}
+
+/* dotted rectangle */
+.preview-dots {
+  width: 92%;                   /* wider like screenshot */
+  height: 78%;
+  border: 2px dotted var(--dots);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  text-align: center;
+  position: relative;
+}
+
+/* extra inner dotted frame (the screenshot has 2 frames) */
+.preview-dots::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 2px dotted rgba(255,255,255,0.22);
+  pointer-events: none;
+}
+
+/* image area: keep it centered, allow more space */
+.preview-frame {
+  width: 100%;
+  height: 185px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  z-index: 1; /* above inner dotted frame */
+}
+
+/* your screenshot shows image not filling fully — keep contain */
+.preview-img {
+  max-width: 78%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* Detect button positioned lower like screenshot */
+.detect-btn {
+  margin-top: 6px;
+  font-size: 20px;
+  padding: 10px 34px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: white;
+
+  background: rgba(0, 180, 220, 0.25);
+  border: 1px solid rgba(0, 180, 220, 0.55);
+  z-index: 1; /* above inner dotted frame */
+}
+
+.detect-btn:hover {
+  border-color: rgba(32, 227, 255, 0.85);
+}
+
+.detect-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   RESULT SCREEN (the page that loads after Detect Defect)
+   - centers card inside cyan panel
+   - big "Analysis Result" title above
+   - "Add another image" button only on result screen
+   ========================= */
+
+.above-title {
+  text-align: center;
+  margin: 40px 0 22px;          /* more spacing like screenshot */
+  font-size: 44px;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.result-box {
+  width: min(560px, 92%);
+  margin: 0 auto;
+  background: var(--inner);
+  border: 2px dashed var(--dash);
+  padding: 28px 22px;
+  text-align: center;
+}
+
+/* make inner border dotted like your screenshot (optional) */
+.result-box::after {
+  content: "";
+  display: block;
+  margin-top: 0;
+}
+
+.result-head {
+  font-size: 52px;
+  margin-bottom: 14px;
+  letter-spacing: 2px;
+}
+
+.result-pill {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: rgba(0, 180, 220, 0.25);
+  border: 1px solid rgba(0, 180, 220, 0.55);
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.result-strong {
+  font-weight: 800;
+}
+
+.result-desc {
+  font-size: 20px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 10px;
+}
+
+.result-conf {
+  margin-top: 14px;
+  font-size: 18px;
+  color: rgba(220, 250, 255, 0.9);
+}
+
+.big-btn {
+  margin: 22px auto 0;
+  display: block;
+  font-size: 22px;
+  padding: 12px 28px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #90E8FF;
+  background: #012B36B2;;
+  border: 1px solid  #90E8FF;
+}
+
+.big-btn:hover {
+  border-color: rgba(32, 227, 255, 0.85);
+}
+
+.footer-note {
+  margin-top: 40px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+/* Keep these if you still use them elsewhere */
+.actions-row {
+  width: min(820px, 92vw);
+  margin: 14px auto 0;
+  text-align: center;
+}
+
+.secondary-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.9);
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}
