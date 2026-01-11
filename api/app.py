@@ -31,7 +31,7 @@ else:
     import_error = None
 
 # Config
-MODEL_REL_PATH = os.environ.get("MODEL_PATH", os.path.join(ROOT, "api\\saved_model", "steel_defect_model.pth"))
+MODEL_REL_PATH = os.environ.get("MODEL_PATH", os.path.join(ROOT, "api", "saved_model", "steel_defect_model.pth"))
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 CORS_ALLOWED = os.environ.get("CORS_ALLOWED_ORIGINS", "*")
 
@@ -59,7 +59,10 @@ else:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[
+        "http://localhost:8000",
+        "https://steel-detection-webapp.vercel.app",  # replace later
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
