@@ -59,10 +59,7 @@ else:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:8000",
-        "https://steel-detection-webapp.vercel.app",  # replace later
-    ],
+    allow_origins=origins,   # ✅ use env-parsed origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
