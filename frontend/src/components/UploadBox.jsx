@@ -18,6 +18,12 @@ const DEFECT_INFO = {
     "Surface scratches caused by contact with sharp objects or rough handling.",
 };
 
+const SAMPLE_IMAGES = ["/samples/1.jpeg", "/samples/2.jpeg", "/samples/3.jpeg"];
+
+function randSample() {
+  return SAMPLE_IMAGES[Math.floor(Math.random() * SAMPLE_IMAGES.length)];
+}
+
 function CloudIcon() {
   return (
     <svg width="88" height="58" viewBox="0 0 88 58" fill="none">
@@ -75,6 +81,21 @@ export default function UploadBox() {
     setResult(null);
     setLoading(false);
     setStage("preview");
+  }
+
+  async function useSample() {
+    const url = randSample();
+
+    // fetch the image and convert to File so your existing predictImage(file) works
+    const resp = await fetch(url);
+    const blob = await resp.blob();
+
+    const ext = url.split(".").pop() || "jpg";
+    const f = new File([blob], `sample.${ext}`, {
+      type: blob.type || "image/jpeg",
+    });
+
+    pickFile(f); // reuse your existing flow (goes to preview screen)
   }
 
   async function onDetect() {
@@ -179,9 +200,9 @@ export default function UploadBox() {
         </div>
 
         <p className="helper">
-          Review the uploaded image and click <b>Detect Defect</b> to analyze it.
+          Review the uploaded image and click <b>Detect Defect</b> to analyze
+          it.
         </p>
-
 
         {!loading && result?.error && (
           <div className="result-strip">
@@ -228,6 +249,10 @@ export default function UploadBox() {
               or click to upload
             </button>
 
+            <button className="sample-btn" type="button" onClick={useSample}>
+              Use Sample Image
+            </button>
+
             <input
               ref={inputRef}
               type="file"
@@ -239,12 +264,12 @@ export default function UploadBox() {
         </div>
       </div>
       <p className="helper">
-          Upload a clear steel surface image to identify
-          <br />
-          potential manufacturing defects using an AI model.
-          <br />
-          Supported formats: JPG, PNG
-        </p>
+        Upload a clear steel surface image to identify
+        <br />
+        potential manufacturing defects using an AI model.
+        <br />
+        Supported formats: JPG, PNG
+      </p>
     </div>
   );
 }
